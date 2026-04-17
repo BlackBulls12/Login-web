@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+<style>
+body {
+  background: black;
+  color: white;
+  font-family: Arial;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.container {
+  background: #222;
+  padding: 30px;
+  border-radius: 15px;
+  width: 300px;
+}
+input, button {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+}
+button {
+  background: red;
+  color: white;
+  border: none;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Black Bulls</h2>
+
+  <input type="text" id="user" placeholder="Usuario">
+  <input type="password" id="pass" placeholder="Contraseña">
+
+  <button onclick="login()">Entrar</button>
+</div>
+
+<script>
+async function login() {
+  const username = document.getElementById("user").value;
+  const password = document.getElementById("pass").value;
+
+  const res = await fetch('/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username, password })
+  });
+
+  const text = await res.text();
+
+  if (text === "OK") {
+    window.location.href = "/privado";
+  } else {
+    alert(text);
+  }
+}
+</script>
+
+</body>
+</html
